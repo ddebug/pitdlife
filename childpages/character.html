@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>角色创建界面</title>
+</head>
+<body>
+	<h1>欢迎创建角色！</h1>
+	<form onsubmit="createCharacter(event)">
+		<label for="name-input">姓名：</label>
+		<input type="text" id="name-input" required><br>
+		<label for="age-input">年龄：</label>
+		<input type="number" id="age-input" required><br>
+		<label for="major-input">专业：</label>
+		<select id="major-input" required>
+			<option value="计算机科学">计算机科学</option>
+			<option value="物理学">物理学</option>
+			<option value="化学">化学</option>
+			<option value="生物学">生物学</option>
+			<option value="心理学">心理学</option>
+		</select><br>
+		<button type="submit">创建角色</button>
+	</form>
+
+	<script>
+		function createCharacter(event) {
+			event.preventDefault();
+			
+			// 获取用户输入的信息
+			let name = document.getElementById('name-input').value;
+			let age = document.getElementById('age-input').value;
+			let major = document.getElementById('major-input').value;
+
+			// 根据输入创建角色对象
+			let character = {
+				name: name,
+				age: age,
+				major: major,
+				san: 100,
+				health: 100,
+				favorability: 50,
+				completion: 0,
+				quality: ''
+			};
+
+			// 将角色对象存储到本地存储中
+			localStorage.setItem('character', JSON.stringify(character));
+
+			// 跳转到主界面
+			window.location.href = 'index.html';
+		}
+	</script>
+</body>
+</html>
