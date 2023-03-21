@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>角色创建</title>
+</head>
+<body>
+	<h1>欢迎来到角色创建系统</h1>
+	<form>
+		<label for="gender">性别：</label>
+		<input type="radio" name="gender" value="male" checked>男
+		<input type="radio" name="gender" value="female">女
+		<br>
+		<label for="age">年龄：</label>
+		<input type="number" name="age" min="18" max="60" required>
+		<br>
+		<label for="major">专业：</label>
+		<select name="major">
+			<option value="computer_science">计算机科学</option>
+			<option value="mathematics">数学</option>
+			<option value="physics">物理</option>
+			<option value="chemistry">化学</option>
+			<option value="biology">生物</option>
+		</select>
+		<br>
+		<input type="submit" value="创建角色">
+	</form>
+	<hr>
+	<h2>您创建的角色信息如下：</h2>
+	<p>性别：<span id="gender"></span></p>
+	<p>年龄：<span id="age"></span></p>
+	<p>专业：<span id="major"></span></p>
+
+	<script>
+		document.querySelector('form').addEventListener('submit', function(event) {
+			event.preventDefault(); // 取消默认提交行为
+			var formData = new FormData(event.target); // 获取表单数据
+			document.getElementById('gender').textContent = formData.get('gender');
+			document.getElementById('age').textContent = formData.get('age');
+			document.getElementById('major').textContent = formData.get('major');
+		});
+	</script>
+</body>
+</html>

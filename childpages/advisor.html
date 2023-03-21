@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>导师任务</title>
+</head>
+<body>
+	<h1>欢迎来到导师任务系统</h1>
+	<h2>您当前的导师好感度为：<span id="favorability">80</span></h2>
+	<ul id="task-list">
+		<li><button onclick="simulateTaskCompletion('task-1')">任务1：编写一篇论文</button></li>
+		<li><button onclick="simulateTaskCompletion('task-2')">任务2：完成一项研究</button></li>
+		<li><button onclick="simulateTaskCompletion('task-3')">任务3：参加一次学术会议</button></li>
+	</ul>
+
+	<script>
+		var favorability = 80; // 导师好感度
+		document.getElementById('favorability').textContent = favorability;
+
+		function simulateTaskCompletion(taskId) {
+			var probability = Math.random(); // 模拟任务完成概率
+			if (probability > favorability / 100) {
+				alert('任务失败！');
+				favorability -= 10;
+			} else {
+				alert('任务完成！');
+				favorability += 5;
+			}
+			document.getElementById('favorability').textContent = favorability;
+		}
+	</script>
+</body>
+</html>
