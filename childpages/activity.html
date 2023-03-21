@@ -1,44 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>角色创建</title>
+	<title>活动选择</title>
 </head>
 <body>
     <li onclick="window.location.href='../index.html'">返回主界面</li>
-	<h1>欢迎来到角色创建系统</h1>
-	<form>
-		<label for="gender">性别：</label>
-		<input type="radio" name="gender" value="male" checked>男
-		<input type="radio" name="gender" value="female">女
-		<br>
-		<label for="age">年龄：</label>
-		<input type="number" name="age" min="18" max="60" required>
-		<br>
-		<label for="major">专业：</label>
-		<select name="major">
-			<option value="computer_science">计算机科学</option>
-			<option value="mathematics">数学</option>
-			<option value="physics">物理</option>
-			<option value="chemistry">化学</option>
-			<option value="biology">生物</option>
-		</select>
-		<br>
-		<input type="submit" value="创建角色">
-	</form>
-	<hr>
-	<h2>您创建的角色信息如下：</h2>
-	<p>性别：<span id="gender"></span></p>
-	<p>年龄：<span id="age"></span></p>
-	<p>专业：<span id="major"></span></p>
+    <h1>请选择一项活动</h1>
 
-	<script>
-		document.querySelector('form').addEventListener('submit', function(event) {
-			event.preventDefault(); // 取消默认提交行为
-			var formData = new FormData(event.target); // 获取表单数据
-			document.getElementById('gender').textContent = formData.get('gender');
-			document.getElementById('age').textContent = formData.get('age');
-			document.getElementById('major').textContent = formData.get('major');
-		});
-	</script>
-</body>
-</html>
+<ul>
+    <li onclick="study()">学习</li>
+    <li onclick="exercise()">锻炼</li>
+    <li onclick="socialize()">社交</li>
+</ul>
+
+<script>
+    function updateStats(stats) {
+        // 更新数值数据
+        document.getElementById('san-value').textContent = stats.san;
+        document.getElementById('health-value').textContent = stats.health;
+        document.getElementById('favorability-value').textContent = stats.favorability;
+        document.getElementById('completion-value').textContent = stats.completion;
+        document.getElementById('quality-value').textContent = stats.quality;
+    }
+
+    function study() {
+        // 发送请求更新数值数据（模拟API接口）
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://example.com/api/study', true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var stats = JSON.parse(xhr.responseText);
+                updateStats(stats);
+            }
+        };
+        xhr.send();
+    }
+
+    function exercise() {
+        // 发送请求更新数值数据（模拟API接口）
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://example.com/api/exercise', true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var stats = JSON.parse(xhr.responseText);
+                updateStats(stats);
+            }
+        };
+        xhr.send();
+    }
+
+    function socialize() {
+        // 发送请求更新数值数据（模拟API接口）
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://example.com/api/socialize', true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var stats = JSON.parse(xhr.responseText);
+                updateStats(stats);
+            }
+        };
+        xhr.send();
+    }
+</script>
