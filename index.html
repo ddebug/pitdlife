@@ -2,72 +2,36 @@
 <html>
 <head>
 	<title>硕博模拟器玩法介绍</title>
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 0;
-			background-color: #f5f5f5;
-		}	
-		header {
-		background-color: #0a71b0;
-		color: #fff;
-		padding: 10px;
-		text-align: center;
-		}
-
-		h1 {
-		margin: 0;
-		font-size: 2.5em;
-		line-height: 1.2;
-		padding: 10px;
-		}
-
-		p {
-		font-size: 1.2em;
-		line-height: 1.5;
-		margin: 20px 0;
-		padding: 0 10px;
-		}
-
-		ul {
-		list-style-type: none;
-		padding: 0;
-		margin: 20px 0;
-		}
-
-		li {
-		margin: 10px;
-		padding: 10px;
-		background-color: #fff;
-		border: 1px solid #ccc;
-		border-radius: 5px;
-		}
-
-		a {
-		color: #0a71b0;
-		text-decoration: none;
-		}
-
-		a:hover {
-		text-decoration: underline;
-		}
-
-</style>
-
+	<link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
 	<h1>欢迎来到硕博模拟器</h1>
 	<p>点击下方按钮开学</p>
-	<p></p>
 	<ul>
-		<li onclick="window.location.href='./childpages/activity.html'">角色创建</li>
-			<li onclick="window.location.href='./childpages/stats.html'">数值页面</li>
-			<li onclick="window.location.href='./childpages/activity.html'">活动选择</li>
-			<li onclick="window.location.href='./childpages/advisor.html'">导师任务</li>
-			<li onclick="window.location.href='./childpages/experiment.html'">实验页面</li>
-			<li onclick="window.location.href='./childpages/event.html'">随机事件</li>
-			<li onclick="window.location.href='./childpages/thesis.html'">论文页面</li>
+		<li onclick="window.location.href='./childpages/stats.html'">数值页面</li>
+		<li onclick="window.location.href='./childpages/activity.html'">活动选择</li>
+		<li onclick="window.location.href='./childpages/advisor.html'">导师任务</li>
+		<li onclick="window.location.href='./childpages/experiment.html'">实验页面</li>
+		<li onclick="window.location.href='./childpages/event.html'">随机事件</li>
+		<li onclick="window.location.href='./childpages/thesis.html'">论文页面</li>
+		<li onclick="window.location.href='./childpages/character.html'">学生信息</li>
 	</ul>
+	<script>
+		window.onload = function() {
+			let character = localStorage.getItem('character');
+			if (character) {
+				document.querySelector('p').style.display = 'none';// 有角色不做处理
+			} else {
+				let button = document.createElement('button');
+				button.textContent = '  开学   ';
+				button.onclick = function() {
+					window.location.href = './childpages/character.html';
+					document.querySelector('ul').style.display = 'block'; // 创建角色后再将ul显示出来
+				};
+				document.querySelector('ul').style.display = 'none'; // 初始时将ul隐藏
+				document.body.appendChild(button);
+			}
+		};
+	</script>
 </body>
 </html>

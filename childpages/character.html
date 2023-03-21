@@ -5,25 +5,22 @@
 </head>
 <body>
     <li onclick="window.location.href='../index.html'">返回主界面</li>
-
-    <h1>输入学籍</h1>
-	<form onsubmit="createCharacter(event)">
-		<label for="name-input">姓名：</label>
-		<input type="text" id="name-input" required><br>
-		<label for="age-input">年龄：</label>
-		<input type="number" id="age-input" required><br>
-		<label for="major-input">专业：</label>
-		<select id="major-input" required>
-			<option value="计算机科学">计算机科学</option>
-			<option value="物理学">物理学</option>
-			<option value="化学">化学</option>
-			<option value="生物学">生物学</option>
-			<option value="心理学">心理学</option>
-		</select><br>
-		<button type="submit">创建角色</button>
-	</form>
-
+    <link rel="stylesheet" type="text/css" href="css/character.css">
 	<script>
+		function displayCharacter(character) {
+			let info = document.createElement('p');
+			info.innerHTML = `姓名：${character.name}<br>年龄：${character.age}<br>专业：${character.major}`;
+			document.body.appendChild(info);
+
+			let deleteButton = document.createElement('button');
+			deleteButton.textContent = '删除角色';
+			deleteButton.onclick = function() {
+				localStorage.removeItem('character');
+				window.location.reload();
+			};
+			document.body.appendChild(deleteButton);
+		}
+
 		function createCharacter(event) {
 			event.preventDefault();
 			
@@ -48,8 +45,71 @@
 			localStorage.setItem('character', JSON.stringify(character));
 
 			// 跳转到主界面
-			window.location.href = 'index.html';
+			window.location.href = '../index.html';
 		}
-	</script>
+
+		window.onload = function() {
+  let character = localStorage.getItem('character');
+  if (character) {
+    displayCharacter(JSON.parse(character));
+  } else {
+    let form = document.createElement('form');
+    form.onsubmit = createCharacter;
+
+    let nameLabel = document.createElement('label');
+    nameLabel.textContent = '姓名：';
+    form.appendChild(nameLabel);
+
+    let nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.id = 'name-input';
+    nameInput.required = true;
+    form.appendChild(nameInput);
+
+    form.appendChild(document.createElement('br'));
+
+    let ageLabel = document.createElement('label');
+    ageLabel.textContent = '年龄：';
+    form.appendChild(ageLabel);
+
+    let ageInput = document.createElement('input');
+    ageInput.type = 'number';
+    ageInput.id = 'age-input';
+    ageInput.required = true;
+    form.appendChild(ageInput);
+
+    form.appendChild(document.createElement('br'));
+
+    let majorLabel = document.createElement('label');
+    majorLabel.textContent = '专业：';
+    form.appendChild(majorLabel);
+
+    let majorSelect = document.createElement('select');
+    majorSelect.id = 'major-input';
+    majorSelect.required = true;
+    form.appendChild(majorSelect);
+
+    let majors = ['计算机科学', '物理学', '化学', '生物学', '心理学'];
+    for (let i = 0; i < majors.length; i++) {
+      let option = document.createElement('option');
+      option.value = majors[i];
+      option.textContent = majors[i];
+      majorSelect.appendChild(option);
+    }
+
+    form.appendChild(document.createElement('br'));
+
+    let submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.textContent = '创建角色';
+
+    form.appendChild(submitButton);
+    document.body.appendChild(form);
+  }
+};
+
+
+</script>
+
 </body>
 </html>
