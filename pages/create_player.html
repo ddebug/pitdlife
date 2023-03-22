@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create Player</title>
+</head>
+<body>
+	<h1>Create Player</h1>
+	<form method="POST" action="{{ url_for('create_player') }}">
+		<label for="name">Name:</label>
+		<input type="text" name="name" required><br><br>
+
+		<label for="gender">Gender:</label>
+		<input type="radio" name="gender" value="male" required>Male
+		<input type="radio" name="gender" value="female" required>Female<br><br>
+
+		<label for="age">Age:</label>
+		<input type="number" name="age" min="18" max="99" required><br><br>
+
+		<label for="major">Major:</label>
+		<input type="text" name="major" required><br><br>
+
+		<input type="submit" value="Create">
+	</form>
+</body>
+</html>
